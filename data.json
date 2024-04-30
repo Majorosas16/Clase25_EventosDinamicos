@@ -1,0 +1,38 @@
+
+
+{
+    "tareasNormales": [
+        {
+            "id": 1,
+            "nombre": "Sacar la basura",
+            "terminada": true
+        },
+        {
+            "id": 2,
+            "nombre": "Cocinar almuerzo",
+            "terminada": false
+        },
+        {
+            "id": 3,
+            "nombre": "Estudiar para fundamentos",
+            "terminada": true
+        }
+    ],
+    "tareasCriticas": [
+        {
+            "id": 4,
+            "nombre": "Asistir a fundamentos de programacion",
+            "terminada": true
+        },
+        {
+            "id": 5,
+            "nombre": "Ir a carullazo",
+            "terminada": false
+        },
+        {
+            "id": 6,
+            "nombre": "Sufrir por el aprendizaje activo",
+            "terminada": false
+        }
+    ]
+}

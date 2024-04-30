@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.tareas {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 400px;
+}
+
+.tarea {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.tarea__nombre {
+    color: orange;
+}
+
+.tarea__nombre--terminada {
+    text-decoration: line-through;
+}
+
+.barraBusqueda {
+    margin-bottom: 1rem;
+    width: 400px;
+}
