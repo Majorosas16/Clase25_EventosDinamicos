@@ -1,7 +1,9 @@
 import { obtenerDatos, Tarea } from "./utils.js";
 
-const renderizarTareas = async () =>{
+const renderizarTareas = async (textoBusqueda) =>{
     const data = await obtenerDatos();
+
+    const textoLimpio=textoBusqueda.toLowerCase();
 
     const tareasNormales = document.querySelector("#tareasNormales");
     tareasNormales.innerHTML = "";
@@ -14,7 +16,13 @@ const renderizarTareas = async () =>{
         );
 
         const tareaRender = instanciaTarea.render();
-        tareasNormales.appendChild(tareaRender);
+
+        if(textoLimpio === ""||
+            tareaNormal.nombre.toLowerCase().includes(textoLimpio)){
+
+            tareasNormales.appendChild(tareaRender);
+            instanciaTarea.addEventListeners();
+        }
     }
 
     const tareasCriticas = document.querySelector("#tareasCriticas");
@@ -28,13 +36,29 @@ const renderizarTareas = async () =>{
         );
 
         const tareaRender = instanciaTarea2.render();
-        tareasCriticas.appendChild(tareaRender);
+
+        if(textoLimpio === "" ||
+         tareaCritica.nombre.toLowerCase().includes(textoLimpio)){
+
+            tareasCriticas.appendChild(tareaRender);
+            instanciaTarea2.addEventListeners();
+        }
+
+
+
     }
 
 };
 
 const render = async () => {
-    await renderizarTareas();
+    await renderizarTareas("");
+
+    const barraBusqueda = document.querySelector (".barraBusqueda");
+    barraBusqueda.addEventListener("input", async (event) =>{
+        const textBusqueda =event.target.value;
+
+        await renderizarTareas(textBusqueda);
+    })
 };
 
 document.addEventListener("DOMContentLoaded", render);

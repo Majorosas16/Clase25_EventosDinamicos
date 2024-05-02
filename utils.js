@@ -1,34 +1,48 @@
 export const obtenerDatos = async () => {
-    const response = await fetch ("./data.json");
-    const data= await response.json();
+    const response = await fetch("./data.json");
+    const data = await response.json();
     return data;
 }
 
-export class Tarea{
+export class Tarea {
     nombre;
     terminado;
     #id;
 
-    constructor (id,nombre,terminado){
-        this.#id=id;
-        this.terminado=terminado;
-        this.nombre=nombre;
+    #nodoNombreTarea;
+    #nodoEstadoTarea;
+    #nodoBotonELiminar;
+    #nodoContenedorTarea;
+
+    constructor(id, nombre, terminado) {
+        this.#id = id;
+        this.terminado = terminado;
+        this.nombre = nombre;
     }
 
-    render(){
+    render() {
         const contenedorTarea = document.createElement("div");
+        contenedorTarea.id = this.id;
+        contenedorTarea.classList.add("tarea");
+        this.#nodoContenedorTarea=contenedorTarea;
 
-        contenedorTarea.id=this.id;
+        const checkBoxTarea = document.createElement("input");
+        checkBoxTarea.type = "checkbox";
+        checkBoxTarea.checked = this.terminado;
+        this.#nodoEstadoTarea = checkBoxTarea;
 
-        const checkBoxTarea= document.createElement("input");
-        checkBoxTarea.type="checkbox";
-        checkBoxTarea.checked=this.terminado;
+        const nombreTarea = document.createElement("p");
+        nombreTarea.textContent = this.nombre;
+        nombreTarea.classList.add("tarea__nombre");
+        this.#nodoNombreTarea = nombreTarea;
 
-        const nombreTarea= document.createElement("p");
-        nombreTarea.textContent= this.nombre;
+        if (this.terminado === true) {
+            nombreTarea.classList.add("tarea__nombre--terminada");
+        }
 
         const botonEliminar = document.createElement("button");
-        botonEliminar.textContent="Eliminar";
+        botonEliminar.textContent = "Eliminar";
+        this.#nodoBotonELiminar=botonEliminar;
 
         contenedorTarea.appendChild(checkBoxTarea);
         contenedorTarea.appendChild(nombreTarea);
@@ -36,4 +50,22 @@ export class Tarea{
 
         return contenedorTarea;
     }
+
+    addEventListeners() {
+
+        this.#nodoEstadoTarea.addEventListener("input", (event) => {
+            const status = event.target.checked;
+
+            if (status === true) {
+                this.#nodoNombreTarea.classList.add("tarea__nombre--terminada");
+            } else {
+                this.#nodoNombreTarea.classList.remove("tarea__nombre--terminada");
+            }
+        });
+
+        this.#nodoBotonELiminar.addEventListener("click", () =>{
+            this.#nodoContenedorTarea.remove();
+        });
+    }
 }
+
